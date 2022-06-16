@@ -1,0 +1,8 @@
+G:\COMP.4204 - System Development - S1 - 2022\Shop-30065360LIAM\bin\Debug\Shop-30065360LIAM.exe.config
+G:\COMP.4204 - System Development - S1 - 2022\Shop-30065360LIAM\bin\Debug\Shop-30065360LIAM.exe
+G:\COMP.4204 - System Development - S1 - 2022\Shop-30065360LIAM\bin\Debug\Shop-30065360LIAM.pdb
+G:\COMP.4204 - System Development - S1 - 2022\Shop-30065360LIAM\obj\Debug\Shop-30065360LIAM.csproj.AssemblyReference.cache
+G:\COMP.4204 - System Development - S1 - 2022\Shop-30065360LIAM\obj\Debug\Shop-30065360LIAM.csproj.SuggestedBindingRedirects.cache
+G:\COMP.4204 - System Development - S1 - 2022\Shop-30065360LIAM\obj\Debug\Shop-30065360LIAM.csproj.CoreCompileInputs.cache
+G:\COMP.4204 - System Development - S1 - 2022\Shop-30065360LIAM\obj\Debug\Shop-30065360LIAM.exe
+G:\COMP.4204 - System Development - S1 - 2022\Shop-30065360LIAM\obj\Debug\Shop-30065360LIAM.pdb
