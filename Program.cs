@@ -59,33 +59,33 @@ namespace Shop_30065360LIAM
                                                                 "",
                                                                 "        AMD CPUs:",
                                                                 "",
-                                                                "        (0): $240 - AMD Ryzen 5 5500",
+                                                                "        (0): $385 - AMD Ryzen 5 5600X",
                                                                 "        (1): $330 - AMD Ryzen 5 5600",
-                                                                "        (2): $320 - AMD Ryzen 5 5600G",
-                                                                "        (3): $385 - AMD Ryzen 5 5600X",
-                                                                "        (4): $470 - AMD Ryzen 7 5700X" };
+                                                                "        (2): $470 - AMD Ryzen 7 5700X",
+                                                                "        (3): $320 - AMD Ryzen 5 5600G",
+                                                                "        (4): $240 - AMD Ryzen 5 5500" };
         static string[] Category_2 = new string[] {             "====================     USE LEFT/RIGHT ARROWS TO SCROLL THROUGH CATEGORIES     ====================",
                                                                 "",
                                                                 "        Balance:",
                                                                 "",
-                                                                "        intel CPUs:",
+                                                                "        INTEL CPUs:",
                                                                 "",
-                                                                "        (0): $240 - AMD Ryzen 5 5500",
-                                                                "        (1): $330 - AMD Ryzen 5 5600",
-                                                                "        (2): $320 - AMD Ryzen 5 5600G",
-                                                                "        (3): $385 - AMD Ryzen 5 5600X",
-                                                                "        (4): $470 - AMD Ryzen 7 5700X" };
+                                                                "        (0): $285 - Intel Core i5 12400F",
+                                                                "        (1): $195 - Intel Core i5 10400F",
+                                                                "        (2): $660 - Intel Core i7-12700K",
+                                                                "        (3): $620 - Intel Core i7-12700KF",
+                                                                "        (4): $950 - Intel Core i9-12900K" };
         static string[] Category_3 = new string[] {             "====================     USE LEFT/RIGHT ARROWS TO SCROLL THROUGH CATEGORIES     ====================",
                                                                 "",
                                                                 "        Balance:",
                                                                 "",
-                                                                "        gpus:",
+                                                                "        GPUs:",
                                                                 "",
-                                                                "        (0): $240 - AMD Ryzen 5 5500",
-                                                                "        (1): $330 - AMD Ryzen 5 5600",
-                                                                "        (2): $320 - AMD Ryzen 5 5600G",
-                                                                "        (3): $385 - AMD Ryzen 5 5600X",
-                                                                "        (4): $470 - AMD Ryzen 7 5700X" };
+                                                                "        (0): $390 - GEFORCE RTX 3050",
+                                                                "        (1): $515 - GEFORCE RTX 3060",
+                                                                "        (2): $780 - GEFORCE RTX 3070",
+                                                                "        (3): $1095 - GEFORCE RTX 3080",
+                                                                "        (4): $2345 - GEFORCE RTX 3090" };
 
 
         static void Main(string[] args)
@@ -119,7 +119,7 @@ namespace Shop_30065360LIAM
                             }
                             else if (username.Length <= 3)
                             {
-                                gui_write(8, 6, "USERNAME IS TOO SHORT!");
+                                gui_write(8, "USERNAME IS TOO SHORT!");
                             }
                             gui_clear_line(8);
                             username = io_readline(8, 8);
@@ -210,6 +210,7 @@ namespace Shop_30065360LIAM
                         break;
                 }
             }
+
 
 
 
