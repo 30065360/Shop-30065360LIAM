@@ -8,10 +8,11 @@ namespace Shop_30065360LIAM
 {
     internal class Program
     {
+        static string[] CLEAR_SCREEN = new string[] {           "====================================================================================================" };
         static string[] login_options = new string[] {          "====================     FOR MULTIPLE CHOICE PLEASE TYPE LETTER IN BRACKETS     ====================",
                                                                 "",
                                                                 "",
-                                                                "        WELCOME TO THE PASSWORD LOCKED NOTEPAD!",
+                                                                "        WELCOME TO THE shopping!",
                                                                 "",
                                                                 "",
                                                                 "",
@@ -33,9 +34,56 @@ namespace Shop_30065360LIAM
                                                                 "",
                                                                 "",
                                                                 "        USERNAME:" };
-        static string[] CLEAR_SCREEN = new string[] {           "====================================================================================================" };
-        static string[] LINESELECTION_SCREEN = new string[] {   "======     ENTER = SELECT LINE - +/- = LINE - ESC = SAVE AND EXIT - UP/DOWN = CHANGE LINE     ======" };
-        static string[] LINE_EDIT_SCREEN = new string[] {       "========================     ENTER = CONFIRM LINE - ESC = SAVE AND EXIT     ========================" };
+        static string[] Account_Decision = new string[] {       "====================================================================================================",
+                                                                "",
+                                                                "        Balance: $",
+                                                                "",
+                                                                "        WHAT WOULD YOU LIKE TO DO:",
+                                                                "",
+                                                                "            (A)DD FUNDS TO WALLET",
+                                                                "            (B)ROWSE CATALOG",
+                                                                "            (V)EIW ITEMS IN INVENTORY" };
+        static string[] ADD_FUNDS = new string[] {              "====================     USE LEFT/RIGHT ARROWS TO SCROLL THROUGH CATEGORIES     ====================",
+                                                                "",
+                                                                "        Balance: $",
+                                                                "",
+                                                                "",
+                                                                "        INPUT NUMBER TO CHANGE FUNDS TO:" };
+        static string[] Category_1 = new string[] {             "====================     USE LEFT/RIGHT ARROWS TO SCROLL THROUGH CATEGORIES     ====================",
+                                                                "",
+                                                                "        Balance:",
+                                                                "",
+                                                                "        AMD CPUs:",
+                                                                "",
+                                                                "        (0): $240 - AMD Ryzen 5 5500",
+                                                                "        (1): $330 - AMD Ryzen 5 5600",
+                                                                "        (2): $320 - AMD Ryzen 5 5600G",
+                                                                "        (3): $385 - AMD Ryzen 5 5600X",
+                                                                "        (4): $470 - AMD Ryzen 7 5700X" };
+        static string[] Category_2 = new string[] {             "====================     USE LEFT/RIGHT ARROWS TO SCROLL THROUGH CATEGORIES     ====================",
+                                                                "",
+                                                                "        Balance:",
+                                                                "",
+                                                                "        AMD CPUs:",
+                                                                "",
+                                                                "        (0): $240 - AMD Ryzen 5 5500",
+                                                                "        (1): $330 - AMD Ryzen 5 5600",
+                                                                "        (2): $320 - AMD Ryzen 5 5600G",
+                                                                "        (3): $385 - AMD Ryzen 5 5600X",
+                                                                "        (4): $470 - AMD Ryzen 7 5700X" };
+        static string[] Category_3 = new string[] {             "====================     USE LEFT/RIGHT ARROWS TO SCROLL THROUGH CATEGORIES     ====================",
+                                                                "",
+                                                                "        Balance:",
+                                                                "",
+                                                                "        AMD CPUs:",
+                                                                "",
+                                                                "        (0): $240 - AMD Ryzen 5 5500",
+                                                                "        (1): $330 - AMD Ryzen 5 5600",
+                                                                "        (2): $320 - AMD Ryzen 5 5600G",
+                                                                "        (3): $385 - AMD Ryzen 5 5600X",
+                                                                "        (4): $470 - AMD Ryzen 7 5700X" };
+
+
         static void Main(string[] args)
         {
             string[][] login_info = new_login_info();
@@ -82,7 +130,7 @@ namespace Shop_30065360LIAM
                         gui_write_screen(LOGIN);
 
                         username = io_readline(8, 8);
-                        while (Array.IndexOf(login_info[0], username) == -1)       // check if username is valid then checks if the username index = the password index
+                        while (Array.IndexOf(login_info[0], username) == -1)       // check if username is valid
                         {
                             gui_write(8, 6, "USERNAME IS INVALID!");
                             gui_clear_line(8);
@@ -99,10 +147,93 @@ namespace Shop_30065360LIAM
                         break;
                 }
             }
-            Console.WriteLine(username);
+            int username_index = Array.IndexOf(login_info[0], username);
+            int user_bal = Int32.Parse(login_info[1][username_index]);
+
+
+            gui_write_screen(Account_Decision);
+            gui_write(18, 2, user_bal.ToString());
+            valid_key = ConsoleKey.Q;
+
+            while (valid_key != ConsoleKey.B && valid_key != ConsoleKey.V)
+            {
+                valid_key = io_readkey(8, 10);
+                switch (valid_key)
+                {
+                    // ADD FUNDS TO WALLET
+                    case ConsoleKey.A:
+                        gui_write_screen(ADD_FUNDS);
+                        gui_write(18, 2, user_bal.ToString());
+
+                        bool valid_input = Int32.TryParse(io_readline(8, 6), out user_bal);
+                        
+                        while (!valid_input)
+                        {
+                            gui_write(8, 4, "i said number dipshit");       // This line adds personality
+                            gui_clear_line(6);
+                            valid_input = Int32.TryParse(io_readline(8, 6), out user_bal);
+                        }
+                        lineChanger(user_bal.ToString(), username_index);
+
+                        gui_write_screen(Account_Decision);
+                        gui_write(18, 2, user_bal.ToString());
+                        break;
+
+
+                    // BROWSE CATALOG
+                    case ConsoleKey.B:
+                        /*gui_write_screen(LOGIN);
+
+                        username = io_readline(8, 8);
+                        while (Array.IndexOf(login_info[0], username) == -1)       // check if username is valid
+                        {
+                            gui_write(8, 6, "USERNAME IS INVALID!");
+                            gui_clear_line(8);
+                            username = io_readline(8, 8);
+                            gui_clear_line(6);
+                        }*/
+                        break;
+
+
+                    // VEIW ITEMS IN INVENTORY
+                    case ConsoleKey.V:
+                        /*gui_write_screen(LOGIN);
+
+                        username = io_readline(8, 8);
+                        while (Array.IndexOf(login_info[0], username) == -1)       // check if username is valid
+                        {
+                            gui_write(8, 6, "USERNAME IS INVALID!");
+                            gui_clear_line(8);
+                            username = io_readline(8, 8);
+                            gui_clear_line(6);
+                        }*/
+                        break;
+
+
+                    // invalid option
+                    default:
+                        /*gui_write(8, 10, "PLEASE INPUT A VALID KEY");
+                        valid_key = io_readkey(8, 11);*/
+                        break;
+                }
+            }
+
+            lineChanger(user_bal.ToString(), username_index);
+
+
         }
 
 
+
+        /* function bellow was done by https://stackoverflow.com/questions/1971008/edit-a-specific-line-of-a-text-file-in-c-sharp
+         * what it does is it reads all values in a file and edits a single line and then rewrites the file
+         */
+        static void lineChanger(string newText, int line_to_edit)
+        {
+            string[] arrLine = System.IO.File.ReadAllLines($"{Environment.CurrentDirectory}\\User Info\\user_balences.txt");
+            arrLine[line_to_edit] = newText;
+            System.IO.File.WriteAllLines($"{Environment.CurrentDirectory}\\User Info\\user_balences.txt", arrLine);
+        }
 
 
 
