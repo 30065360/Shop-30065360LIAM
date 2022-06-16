@@ -6,3 +6,11 @@ G:\COMP.4204 - System Development - S1 - 2022\Shop-30065360LIAM\obj\Debug\Shop-3
 G:\COMP.4204 - System Development - S1 - 2022\Shop-30065360LIAM\obj\Debug\Shop-30065360LIAM.csproj.CoreCompileInputs.cache
 G:\COMP.4204 - System Development - S1 - 2022\Shop-30065360LIAM\obj\Debug\Shop-30065360LIAM.exe
 G:\COMP.4204 - System Development - S1 - 2022\Shop-30065360LIAM\obj\Debug\Shop-30065360LIAM.pdb
+C:\Users\123lg\OneDrive\Documents\GitHub\Shop-30065360LIAM\bin\Debug\Shop-30065360LIAM.exe.config
+C:\Users\123lg\OneDrive\Documents\GitHub\Shop-30065360LIAM\bin\Debug\Shop-30065360LIAM.exe
+C:\Users\123lg\OneDrive\Documents\GitHub\Shop-30065360LIAM\bin\Debug\Shop-30065360LIAM.pdb
+C:\Users\123lg\OneDrive\Documents\GitHub\Shop-30065360LIAM\obj\Debug\Shop-30065360LIAM.csproj.AssemblyReference.cache
+C:\Users\123lg\OneDrive\Documents\GitHub\Shop-30065360LIAM\obj\Debug\Shop-30065360LIAM.csproj.SuggestedBindingRedirects.cache
+C:\Users\123lg\OneDrive\Documents\GitHub\Shop-30065360LIAM\obj\Debug\Shop-30065360LIAM.csproj.CoreCompileInputs.cache
+C:\Users\123lg\OneDrive\Documents\GitHub\Shop-30065360LIAM\obj\Debug\Shop-30065360LIAM.exe
+C:\Users\123lg\OneDrive\Documents\GitHub\Shop-30065360LIAM\obj\Debug\Shop-30065360LIAM.pdb

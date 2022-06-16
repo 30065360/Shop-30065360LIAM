@@ -43,12 +43,16 @@ namespace Shop_30065360LIAM
                                                                 "            (A)DD FUNDS TO WALLET",
                                                                 "            (B)ROWSE CATALOG",
                                                                 "            (V)EIW ITEMS IN INVENTORY" };
-        static string[] ADD_FUNDS = new string[] {              "====================     USE LEFT/RIGHT ARROWS TO SCROLL THROUGH CATEGORIES     ====================",
+        static string[] ADD_FUNDS = new string[] {              "====================================================================================================",
                                                                 "",
                                                                 "        Balance: $",
                                                                 "",
                                                                 "",
                                                                 "        INPUT NUMBER TO CHANGE FUNDS TO:" };
+        static string[] ITEMS_IN_INVENTORY = new string[] {     "====================================================================================================",
+                                                                "",
+                                                                "",
+                                                                "        INVENTORY:" };
         static string[] Category_1 = new string[] {             "====================     USE LEFT/RIGHT ARROWS TO SCROLL THROUGH CATEGORIES     ====================",
                                                                 "",
                                                                 "        Balance:",
@@ -64,7 +68,7 @@ namespace Shop_30065360LIAM
                                                                 "",
                                                                 "        Balance:",
                                                                 "",
-                                                                "        AMD CPUs:",
+                                                                "        intel CPUs:",
                                                                 "",
                                                                 "        (0): $240 - AMD Ryzen 5 5500",
                                                                 "        (1): $330 - AMD Ryzen 5 5600",
@@ -75,7 +79,7 @@ namespace Shop_30065360LIAM
                                                                 "",
                                                                 "        Balance:",
                                                                 "",
-                                                                "        AMD CPUs:",
+                                                                "        gpus:",
                                                                 "",
                                                                 "        (0): $240 - AMD Ryzen 5 5500",
                                                                 "        (1): $330 - AMD Ryzen 5 5600",
@@ -122,6 +126,7 @@ namespace Shop_30065360LIAM
                             gui_clear_line(6);
                         }
                         store_new_login_info(username);
+                        login_info = new_login_info();
                         break;
 
 
@@ -157,7 +162,7 @@ namespace Shop_30065360LIAM
 
             while (valid_key != ConsoleKey.B && valid_key != ConsoleKey.V)
             {
-                valid_key = io_readkey(8, 10);
+                valid_key = io_readkey(8, 11);
                 switch (valid_key)
                 {
                     // ADD FUNDS TO WALLET
@@ -182,43 +187,31 @@ namespace Shop_30065360LIAM
 
                     // BROWSE CATALOG
                     case ConsoleKey.B:
-                        /*gui_write_screen(LOGIN);
-
-                        username = io_readline(8, 8);
-                        while (Array.IndexOf(login_info[0], username) == -1)       // check if username is valid
-                        {
-                            gui_write(8, 6, "USERNAME IS INVALID!");
-                            gui_clear_line(8);
-                            username = io_readline(8, 8);
-                            gui_clear_line(6);
-                        }*/
                         break;
 
 
                     // VEIW ITEMS IN INVENTORY
                     case ConsoleKey.V:
-                        /*gui_write_screen(LOGIN);
+                        gui_write_screen(ITEMS_IN_INVENTORY);
 
-                        username = io_readline(8, 8);
-                        while (Array.IndexOf(login_info[0], username) == -1)       // check if username is valid
+                        string[] user_items = System.IO.File.ReadAllText($"{Environment.CurrentDirectory}\\User Items\\{username}.txt").Split(new[] { Environment.NewLine }, StringSplitOptions.None);     // this line reads the users items from a file and stores it in user_items
+
+                        foreach (string item in user_items)
                         {
-                            gui_write(8, 6, "USERNAME IS INVALID!");
-                            gui_clear_line(8);
-                            username = io_readline(8, 8);
-                            gui_clear_line(6);
-                        }*/
+                            gui_write(12, Array.IndexOf(user_items, item)+3, item);
+                        }
+                        Console.ReadLine();
                         break;
 
 
                     // invalid option
                     default:
-                        /*gui_write(8, 10, "PLEASE INPUT A VALID KEY");
-                        valid_key = io_readkey(8, 11);*/
+                        gui_write(8, 10, "PLEASE INPUT A VALID KEY");
                         break;
                 }
             }
 
-            lineChanger(user_bal.ToString(), username_index);
+
 
 
         }
@@ -245,11 +238,12 @@ namespace Shop_30065360LIAM
         {
             System.IO.File.AppendAllText($"{Environment.CurrentDirectory}\\User Info\\usernames.txt", $"{Environment.NewLine}{username}");
             System.IO.File.AppendAllText($"{Environment.CurrentDirectory}\\User Info\\user_balences.txt", $"{Environment.NewLine}{50}");
+            System.IO.File.AppendAllText($"{Environment.CurrentDirectory}\\User Items\\{username}.txt", "");
         }
         public static string[][] new_login_info()
         {
-            string[] username = System.IO.File.ReadAllText(Environment.CurrentDirectory + "\\User Info\\usernames.txt").Split(new[] { Environment.NewLine }, StringSplitOptions.None);     // reads the usernames from a file and stores in string variable
-            string[] user_balance = System.IO.File.ReadAllText(Environment.CurrentDirectory + "\\User Info\\user_balences.txt").Split(new[] { Environment.NewLine }, StringSplitOptions.None);     // reads the passwords from a file and stores in string variable
+            string[] username = System.IO.File.ReadAllText($"{Environment.CurrentDirectory}\\User Info\\usernames.txt").Split(new[] { Environment.NewLine }, StringSplitOptions.None);     // reads the usernames from a file and stores in string variable
+            string[] user_balance = System.IO.File.ReadAllText($"{Environment.CurrentDirectory}\\User Info\\user_balences.txt").Split(new[] { Environment.NewLine }, StringSplitOptions.None);     // reads the passwords from a file and stores in string variable
 
 
             return new string[][] { username, user_balance };
