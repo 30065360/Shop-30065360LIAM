@@ -49,13 +49,14 @@ namespace Shop_30065360LIAM
                                                                 "",
                                                                 "",
                                                                 "        INPUT NUMBER TO CHANGE FUNDS TO:" };
-        static string[] ITEMS_IN_INVENTORY = new string[] {     "====================================================================================================",
+        static string[] ITEMS_IN_INVENTORY = new string[] {     "==================================     PRESS ENTER TO GO BACK     ==================================",
                                                                 "",
                                                                 "",
                                                                 "        INVENTORY:" };
-        static string[] Category_1 = new string[] {             "====================     USE LEFT/RIGHT ARROWS TO SCROLL THROUGH CATEGORIES     ====================",
+        static string[] Category_0 = new string[] {             "===========     USE LEFT/RIGHT ARROWS TO SCROLL THROUGH CATEGORIES, ENTER TO GO BACK     ===========",
                                                                 "",
                                                                 "        Balance:",
+                                                                "",
                                                                 "",
                                                                 "        AMD CPUs:",
                                                                 "",
@@ -64,9 +65,10 @@ namespace Shop_30065360LIAM
                                                                 "        (2): $470 - AMD Ryzen 7 5700X",
                                                                 "        (3): $320 - AMD Ryzen 5 5600G",
                                                                 "        (4): $240 - AMD Ryzen 5 5500" };
-        static string[] Category_2 = new string[] {             "====================     USE LEFT/RIGHT ARROWS TO SCROLL THROUGH CATEGORIES     ====================",
+        static string[] Category_1 = new string[] {             "====================     USE LEFT/RIGHT ARROWS TO SCROLL THROUGH CATEGORIES     ====================",
                                                                 "",
                                                                 "        Balance:",
+                                                                "",
                                                                 "",
                                                                 "        INTEL CPUs:",
                                                                 "",
@@ -75,9 +77,10 @@ namespace Shop_30065360LIAM
                                                                 "        (2): $660 - Intel Core i7-12700K",
                                                                 "        (3): $620 - Intel Core i7-12700KF",
                                                                 "        (4): $950 - Intel Core i9-12900K" };
-        static string[] Category_3 = new string[] {             "====================     USE LEFT/RIGHT ARROWS TO SCROLL THROUGH CATEGORIES     ====================",
+        static string[] Category_2 = new string[] {             "====================     USE LEFT/RIGHT ARROWS TO SCROLL THROUGH CATEGORIES     ====================",
                                                                 "",
                                                                 "        Balance:",
+                                                                "",
                                                                 "",
                                                                 "        GPUs:",
                                                                 "",
@@ -85,7 +88,7 @@ namespace Shop_30065360LIAM
                                                                 "        (1): $515 - GEFORCE RTX 3060",
                                                                 "        (2): $780 - GEFORCE RTX 3070",
                                                                 "        (3): $1095 - GEFORCE RTX 3080",
-                                                                "        (4): $2345 - GEFORCE RTX 3090" };
+                                                                "        (4): $5" };
 
 
         static void Main(string[] args)
@@ -100,7 +103,7 @@ namespace Shop_30065360LIAM
             ConsoleKey valid_key = ConsoleKey.A;
             string username = "";
 
-            while (valid_key != ConsoleKey.C && valid_key != ConsoleKey.L)
+            while (!(valid_key == ConsoleKey.C || valid_key == ConsoleKey.L))
             {
                 valid_key = io_readkey(8, 11);
                 switch (valid_key)
@@ -112,14 +115,13 @@ namespace Shop_30065360LIAM
                         username = io_readline(8, 8);
                         while (Array.IndexOf(login_info[0], username) != -1 || username.Length <= 3)
                         {
-                            gui_write(8, 8, "USERNAME IS TAKEN!");
                             if (Array.IndexOf(login_info[0], username) != -1)
                             {
                                 gui_write(8, 6, "USERNAME IS TAKEN!");
                             }
                             else if (username.Length <= 3)
                             {
-                                gui_write(8, "USERNAME IS TOO SHORT!");
+                                gui_write(8, 6,"USERNAME IS TOO SHORT!");
                             }
                             gui_clear_line(8);
                             username = io_readline(8, 8);
@@ -148,7 +150,6 @@ namespace Shop_30065360LIAM
                     // invalid option
                     default:
                         gui_write(8, 10, "PLEASE INPUT A VALID KEY");
-                        valid_key = io_readkey(8, 11);
                         break;
                 }
             }
@@ -156,12 +157,16 @@ namespace Shop_30065360LIAM
             int user_bal = Int32.Parse(login_info[1][username_index]);
 
 
-            gui_write_screen(Account_Decision);
-            gui_write(18, 2, user_bal.ToString());
-            valid_key = ConsoleKey.Q;
-
-            while (valid_key != ConsoleKey.B && valid_key != ConsoleKey.V)
+            ConsoleKey browse_key = ConsoleKey.Q;
+            int browse_screen = 0;
+            int purchase_index;
+            while (true)
             {
+                endOfLoop:
+                    ;
+
+                gui_write_screen(Account_Decision);
+                gui_write(18, 2, user_bal.ToString());
                 valid_key = io_readkey(8, 11);
                 switch (valid_key)
                 {
@@ -187,6 +192,88 @@ namespace Shop_30065360LIAM
 
                     // BROWSE CATALOG
                     case ConsoleKey.B:
+                        gui_write_screen(Category_0);
+
+                        browse_key = ConsoleKey.Q;
+                        while (browse_key != ConsoleKey.Enter)
+                        {
+                            browse_key = io_readkey(8, 12);
+                            switch (browse_key)
+                            {
+                                // Change to category on left
+                                case ConsoleKey.LeftArrow:
+                                    if(browse_screen == 0)
+                                    {
+                                        browse_screen = 2;
+                                    }
+                                    else
+                                    {
+                                        browse_screen--;
+                                    }
+                                    break;
+
+
+                                // Change to category on right
+                                case ConsoleKey.RightArrow:
+                                    if (browse_screen == 2)
+                                    {
+                                        browse_screen = 0;
+                                    }
+                                    else
+                                    {
+                                        browse_screen++;
+                                    }
+                                    break;
+
+
+                                // The user buys an item
+                                case var expression when Int32.TryParse(browse_key.ToString().Remove(0, 1), out purchase_index):
+                                    if (purchase_index >= 0 && purchase_index <= 4)
+                                    {
+                                        string[] tempHolding = purchase_item(browse_screen, purchase_index);
+                                        int item_price = Int32.Parse(tempHolding[0]);
+                                        string item_name = tempHolding[1];
+                                        if(item_price <= user_bal)
+                                        {
+                                            user_bal -= item_price;
+                                            lineChanger(user_bal.ToString(), username_index);
+                                            System.IO.File.AppendAllText($"{Environment.CurrentDirectory}\\User Items\\{username}.txt", $"{item_name}{Environment.NewLine}");
+                                        }
+                                        else
+                                        {
+                                            gui_write(8,3,"youre broke");
+                                            continue;
+                                        }
+
+                                    }
+                                    break;
+
+
+                                // Change to category on right
+                                case ConsoleKey.Enter:
+                                    goto endOfLoop;
+
+
+
+
+                                default:
+                                    break;
+                            }
+                            switch (browse_screen)
+                            {
+                                case 0:
+                                    gui_write_screen(Category_0);
+                                    break;
+
+                                case 1:
+                                    gui_write_screen(Category_1);
+                                    break;
+
+                                case 2:
+                                    gui_write_screen(Category_2);
+                                    break;
+                            }
+                        }
                         break;
 
 
@@ -198,9 +285,11 @@ namespace Shop_30065360LIAM
 
                         foreach (string item in user_items)
                         {
-                            gui_write(12, Array.IndexOf(user_items, item)+3, item);
+                            gui_write(12, Array.IndexOf(user_items, item)+4, item);
                         }
                         Console.ReadLine();
+                        gui_write_screen(Account_Decision);
+                        gui_write(18, 2, user_bal.ToString());
                         break;
 
 
@@ -215,6 +304,20 @@ namespace Shop_30065360LIAM
 
 
 
+        }
+
+
+        static string[] purchase_item(int category, int item)
+        {
+            string[] price_with_item = System.IO.File.ReadAllText($"{Environment.CurrentDirectory}\\Items\\Category_{category}.txt").Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            List<string[]> myList = new List<string[]>();
+            foreach (string items in price_with_item)
+            {
+                myList.Add(items.Split(new[] { " - " }, StringSplitOptions.None));
+            }
+            string[][] price_item = myList.ToArray();
+
+            return price_item[item];
         }
 
 

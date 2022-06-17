@@ -1,0 +1,5 @@
+285 - Intel Core i5 12400F
+195 - Intel Core i5 10400F
+660 - Intel Core i7-12700K
+620 - Intel Core i7-12700KF
+950 - Intel Core i9-12900K

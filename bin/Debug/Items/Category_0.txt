@@ -1,0 +1,5 @@
+385 - AMD Ryzen 5 5600X
+330 - AMD Ryzen 5 5600
+470 - AMD Ryzen 7 5700X
+320 - AMD Ryzen 5 5600G
+240 - AMD Ryzen 5 5500
